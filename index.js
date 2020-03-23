@@ -76,10 +76,19 @@ function temperatureCtoF(celsius) {
  * 
  * Hint: You can call your `temperatureCtoF` function from inside `temperatureInF`.
 */
-function temperatureInF(/* code here */) {
-  /* code here */
-}
+function temperatureInF(temperature, unit) {
+  // Converts unit to lower case to ignore the case of the string passed in conditionals.
+  const unitOfmeasurement = unit.toLowerCase();
 
+  if (unitOfmeasurement === "c") {
+    return `${temperatureCtoF(temperature)}F`;
+  } else if (unitOfmeasurement === "f") {
+    return `${temperature}F`;
+  } else {
+    // Returns an error message if the unit argument is not the letter 'c' or 'f'
+    return console.error(`${unit} must be the string 'F' for Fahrenheit or 'C' for Celsius`);
+  } 
+}
 
 /**
  * ### Challenge `makePersonObject`
