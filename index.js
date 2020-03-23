@@ -296,8 +296,14 @@ function getModelYears(inventory) {
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
 */
-function getCarInfoById(/* code here */) {
-  /* code here */
+function getCarInfoById(inventory, id) {
+  for (let i = 0; i < inventory.length; i++) {
+    if (inventory[i].id === id) {
+      const query = inventory[i];
+      
+      return `This is a ${query.car_make} ${query.car_model}`; 
+    }
+  }
 }
 
 /**
@@ -314,8 +320,27 @@ function getCarInfoById(/* code here */) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(/* code here */) {
-  /* code here */
+function getOlderCars(inventory, maxCarYear) {
+  const carYearQuery = [];
+  const minYear = 1900;
+  const maxYear = 2100;
+
+  // If a year from a very long time ago is passed, preemptively return an empty 'carYearQuery'
+  if (maxCarYear < minYear) {
+    return carYearQuery;
+
+    // If a year in the far future is passed, return the entire inventory.
+  } else if (maxCarYear > maxYear) {
+    return inventory;
+  }
+  
+  for (let i = 0; i < inventory.length; i++) {
+    if (inventory[i].car_year <= maxCarYear) {
+      carYearQuery.push(inventory[i]);
+    }
+  }
+
+  return carYearQuery;
 }
 
 /**
@@ -331,8 +356,25 @@ function getOlderCars(/* code here */) {
  * made by either `Audi` or `Mercedes-Benz` or `Volkswagen` or `BMW`,
  * in the same order as they appear in the original inventory.
 */
-function getGermanCars(/* code here */) {
-  /* code here */
+function getGermanCars(inventory) {
+  const germanManufacturers = ["Audi", "Mercedes-Benz", "Volkswagen", "BMW"];
+  const query = [];
+
+  for (let i = 0; i < inventory.length; i++) {
+    const car = inventory[i];
+
+    /*At the current index of the inventory loop, loop through the german manufacturers to 
+    check if the car is produced by one of them */
+    for (let i = 0; i < germanManufacturers.length; i++) {
+      if (car.car_make === germanManufacturers[i]) {
+
+        // If the car was produced by one of the german manufacturers push it to the query array
+        query.push(car);
+      }
+    }
+  }
+
+  return query;
 }
 
 /**
@@ -348,8 +390,16 @@ function getGermanCars(/* code here */) {
  *         (1) causes the odometer in the object to be increased by the distance,
  *         (2) returns the updated value of the `odometer`.
 */
-function carMaker(/* code here */) {
-  /* code here */
+function carMaker(odometer = 0) {
+  const car = {
+    odometer,
+    drive: function(distance) {
+      this.odometer += distance;
+      return this.odometer;
+    }
+  }
+
+  return car;
 }
 
 /// ////// END OF CHALLENGE /////////
