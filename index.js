@@ -180,7 +180,7 @@ function isItAnApple(fruitsArray) {
   const returnArray = [];
 
   for (let i = 0; i < fruitsArray.length; i++) {
-    const isApple = fruitsArray[i].toLowerCase() === "apple" ? true : false;
+    const isApple = fruitsArray[i] === "apple" ? true : false;
 
     returnArray.push(isApple);
   }
