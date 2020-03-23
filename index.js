@@ -150,8 +150,15 @@ function getName(objWithName) {
  * passing in [ 'orange', 'grape', 'apple', 'banana', 'mango' ] as the argument,
  * the returned value should be: 2.
 */
-function appleIndex(/* code here */) {
-  /* code here */
+function appleIndex(fruitsArray) {
+  for (let i = 0; i < fruitsArray.length; i++) {
+    if (fruitsArray[i].toLowerCase() === "apple") {
+      return i;
+    }
+  }
+
+  // Return the passed array if the word apple is not a value of the array
+  return fruitsArray;
 }
 
 /**
